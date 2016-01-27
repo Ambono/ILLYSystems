@@ -3,32 +3,34 @@ using System.Collections;
 
 namespace IllySystems
 {
-  public class ObjectA : IObjectClass
+  public class ObjectA : ObjectClass
   {
     Hashtable objectAHashTable = new Hashtable();
-    public string nameA { get; set; }
-    public int ageA { get; set; }
-    public DateTime dateOfBirthA { get; set; }
+   
     public EmploymentHistory objectAEmploymentHistory = new EmploymentHistory("Marketing", new DateTime(2014, 06, 19), 37.5);
 
     public ObjectA() { }
 
-    public ObjectA(string surname, int age, DateTime dateOfBirth)
+    public ObjectA(string surname, int securityNumber, DateTime dateOfBirth)
     {
-      nameA = surname;
-      ageA = age;
-      dateOfBirthA = dateOfBirth;
+      Surname = surname;
+      SecurityNumber = securityNumber;
+      DateOfBirth = dateOfBirth;
     }
 
-    public Hashtable GetHashtable()
+    public override Hashtable GetHashtable()
     {
       objectAHashTable.Clear();
-      objectAHashTable.Add("Surname", nameA);
-      objectAHashTable.Add("Age", ageA);
-      objectAHashTable.Add("Date of Birth", dateOfBirthA.ToString("MM dd yyyy"));
+      objectAHashTable.Add("Surname", Surname);
+      objectAHashTable.Add("Security Number", SecurityNumber);
+      objectAHashTable.Add("Date of Birth", DateOfBirth.ToString("MM dd yyyy"));
       objectAHashTable.Add("Employment History", "Dept: " + objectAEmploymentHistory.Department
         + " " + "started:  " + objectAEmploymentHistory.startDate.ToString("MM dd yyyy")
         + " hour worked  " + " " + objectAEmploymentHistory.HourWorked);
+      if (DateOfBirth >= objectAEmploymentHistory.startDate)
+      {
+        throw new Exception("Date of birth first object cannot be later than start date");
+      }
       return objectAHashTable;
     }
   }
