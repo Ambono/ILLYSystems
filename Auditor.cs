@@ -7,10 +7,7 @@ namespace IllySystems
   public class Auditor
   {
     //can specify the path here
-    public string PathToOutPutChange = string.Empty;
-    //public void CompareObjects(Hashtable hta, Hashtable htb)
-
-  
+    public string PathToOutPutChange = string.Empty;  
 
     public  Hashtable CompareObjects(ObjectA objecta, ObjectB objectb)
     { 
